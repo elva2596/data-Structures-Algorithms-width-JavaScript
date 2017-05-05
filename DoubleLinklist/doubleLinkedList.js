@@ -168,7 +168,7 @@ doubleLink.reverseTraverse();
 doubleLink.insert(1,"C");
 console.log(`在双向链表的第一个位置插入一个C以后`)
 doubleLink.traverse();
-doubleLink.reverseTraverse();//????
+doubleLink.reverseTraverse();
 console.log(`链表的长度= ${doubleLink.length()}`)
 const ele = doubleLink.removeAt(3);
 console.log(`在链表的第三个位置删除节点以后，删除的节点数据值= ${ele}, 链表的长度=  ${doubleLink.length()}`)
@@ -176,9 +176,7 @@ doubleLink.traverse()
 doubleLink.insert(2,"D");
 doubleLink.insert(2,"E");
 doubleLink.traverse();
-// console.log(`尾结点= ${doubleLink.tail.element}`)
 const ele2 =doubleLink.removeAt(2)
 console.log(`在链表的第二个位置删除节点以后，删除的节点数据值= ${ele2}, 链表的长度=  ${doubleLink.length()}`)
-// console.log(`尾结点= ${doubleLink.tail.element}`)
 doubleLink.traverse();
 doubleLink.reverseTraverse()
