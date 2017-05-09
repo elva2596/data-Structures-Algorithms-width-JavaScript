@@ -5,10 +5,12 @@ function Node(ele){
 }
 function DoubleLink(){
     this.head  = null;
+    this.rear = null;
 }
 //初始化双向链表
 DoubleLink.prototype.initialLink = function (){
-    this.head = new Node("head")
+    this.head = this.rear = new Node("head")
+
 };
 /*
         插入法分三种情况：
@@ -37,20 +39,15 @@ DoubleLink.prototype.insert = function (position,element){
     //在双向链表的最后一个结点后面插入元素的情况
     newNode.previous = p;
     newNode.next = p.next;
+    //如果不是最后一个结点
     if(p.next){
         p.next.previous = newNode
+    }else{
+        this.rear = newNode;
     }
     p.next = newNode;
 
 
-};
-//查找双向链表的最后一个结点
-DoubleLink.prototype.findLastNode = function (){
-    var p = this.head;
-    while(p.next){
-        p=p.next;
-    }
-    return p;
 };
 DoubleLink.prototype.indexOf = function (element){
     if(this.length()===0){
@@ -79,7 +76,7 @@ DoubleLink.prototype.traverse = function (){
 };
 //反向链表输出元素
 DoubleLink.prototype.reverseTraverse = function (){
-    var p = this.findLastNode();
+    var p = this.rear;
     var arr  =[];
     while(p){
         if(p!=this.head){
@@ -117,11 +114,12 @@ DoubleLink.prototype.removeAt = function (position){
     if(!p.next||i>position){
         return 'error';
     }
-    //如果删除的是最后一个结点(p.next)
-    if(p.next===this.findLastNode()){
+    //如果删除的是最后一个结点(p.next是删除结点)
+    if(!p.next.next){
         var q = p.next;
         q.previous = null;
         p.next= null;
+        this.rear = p;
         return q.element;
     }else{
         var q = p.next;
@@ -158,6 +156,7 @@ doubleLink.insert(1,"A");
 console.log(`在双向链表的第一个位置插入一个A以后`)
 doubleLink.traverse();
 doubleLink.reverseTraverse();
+console.log(`双向链表的尾结点元素= ${doubleLink.rear.element}`)
 console.log(`双向链表的长度= ${doubleLink.length()}`);
 const index = doubleLink.indexOf("A")
 console.log(`A元素在链表中的索引值= ${index}`);
@@ -165,18 +164,23 @@ doubleLink.insert(2,"B");
 console.log(`在双向链表的第二个位置插入一个B以后`)
 doubleLink.traverse();
 doubleLink.reverseTraverse();
+console.log(`双向链表的尾结点元素= ${doubleLink.rear.element}`)
 doubleLink.insert(1,"C");
 console.log(`在双向链表的第一个位置插入一个C以后`)
 doubleLink.traverse();
 doubleLink.reverseTraverse();
+console.log(`双向链表的尾结点元素= ${doubleLink.rear.element}`)
 console.log(`链表的长度= ${doubleLink.length()}`)
 const ele = doubleLink.removeAt(3);
 console.log(`在链表的第三个位置删除节点以后，删除的节点数据值= ${ele}, 链表的长度=  ${doubleLink.length()}`)
 doubleLink.traverse()
 doubleLink.insert(2,"D");
 doubleLink.insert(2,"E");
+console.log(`在双向链表的第二个位置连续插入D和E元素之后 `)
 doubleLink.traverse();
-const ele2 =doubleLink.removeAt(2)
-console.log(`在链表的第二个位置删除节点以后，删除的节点数据值= ${ele2}, 链表的长度=  ${doubleLink.length()}`)
+console.log(`双向链表的尾结点元素= ${doubleLink.rear.element}`)
+const ele2 =doubleLink.removeAt(4)
+console.log(`在链表的第四个位置删除节点以后，删除的节点数据值= ${ele2}, 链表的长度=  ${doubleLink.length()}`)
 doubleLink.traverse();
 doubleLink.reverseTraverse()
+console.log(`双向链表的尾结点元素= ${doubleLink.rear.element}`)

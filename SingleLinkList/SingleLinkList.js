@@ -109,8 +109,7 @@ LinkedList.prototype.indexOf= function (e){
  */
 LinkedList.prototype.insert = function (position,element){
     var p = this.head,
-        j=1,
-        newNode;
+        j=1;
         while(p&&j<position){
             p=p.next;
             j++;
@@ -193,6 +192,17 @@ LinkedList.prototype.insertFromEnd = function (element){
     }
     var q = new Node(element);
     p.next = q;
+};
+//合并两个单链表
+LinkedList.unionL = function (linkList1,linkList2){
+    var linkList = linkList1,
+        p= linkList1.head,
+        q = linkList2.head;
+    while (p.next){
+        p= p.next
+    }
+    p.next = q.next;
+    return linkList;
 }
 var linkList = new LinkedList();
 linkList.initialList();//初始化列表
@@ -233,3 +243,11 @@ linkList.insert(4,"D");
 linkList.traverse();
 linkList.insert(1,"M");
 linkList.traverse();
+const link2 = new LinkedList()
+link2.initialList()
+for(let i=1;i<=4;i++){
+    link2.insert(i,i)
+}
+link2.traverse()
+const unionLink = LinkedList.unionL(linkList,link2)
+unionLink.traverse()
